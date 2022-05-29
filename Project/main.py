@@ -3,6 +3,26 @@ from datetime import datetime
 
 # defined functions 
 
+def student_rented():
+    with open("students.csv", 'r') as file_read:
+        file_reader = csv.reader(file_read)
+
+        read = [i for i in file_reader]
+        rented = []
+        count = 0
+
+        for ent in read:
+            if (ent[3]).lower() == "rented":
+                count += 1
+                rented.append(ent)
+
+        print("Number of students who have rented a book: ", count)
+        
+        if count != 0:
+            print("List of students who have rented: ")
+            for stud in rented:
+                print("Name: ", stud[1], "Class: ", stud[2])
+
 def student_defaulter():
 
     # used to check and print list and number of defaulters
@@ -27,10 +47,10 @@ def student_defaulter():
     print("Number of defaulters are: ", count)
     
     print("List of defaulters: ")
-    if count > 0:
+    if count != 0:
         print("NAME  CLASS  RETURN DATE")
-    for stud in defaulter:
-        print(stud[1], stud[2], stud[4])
+        for stud in defaulter:
+            print(stud[1], stud[2], stud[4])
 
 def student_checking(s):
 
@@ -259,7 +279,8 @@ while True: # to make sure continues running of program
             2.Deleting a exsisting record
             3.Update a exsisting record
             4.Print list of defaulters
-            5.Return to previous menu
+            5.Print list of students who have rented
+            6.Return to previous menu
             '''))
 
             if stud == 1:
@@ -284,6 +305,11 @@ while True: # to make sure continues running of program
                 print("--------------------------------------------------------------------------------")
 
             elif stud == 5:
+                print("--------------------------------------------------------------------------------")
+                student_rented()
+                print("--------------------------------------------------------------------------------")
+
+            elif stud == 6:
                 print("--------------------------------------------------------------------------------")
                 break 
 
