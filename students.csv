@@ -2,10 +2,10 @@ Addmission Number,Name,Class,Book Status,Return Date
 39721,Aakash Nath Jha,12th,none,none
 51513,Achyut Pandey,12th,none,none
 15416,Aditya Malik,12th,none,none
-4820,Advay Singh,12th,none,none
+4820,Advay Singh,12th,rented,30/05/2022
 3010,Amodit Yadav,12th,none,none
 37113,Anandita Sharma,12th,none,none
-9910,Antriksh Mahato,12th,none,none
+9910,Antriksh Mahato,12th,rented,30/05/2022
 52013,Arjun Singh,12th,none,none
 41920,Arnav Malik,12th,none,none
 51117,Ashwin Singh Slathia,12th,none,none
@@ -14,15 +14,15 @@ Addmission Number,Name,Class,Book Status,Return Date
 50919,Binayak Mohanta,12th,none,none
 49018,D Prem Kowshik,12th,none,none
 30011,Dhani Verma,12th,none,none
-4110,Divyansh Manav,12th,none,none
+4110,Divyansh Manav,12th,rented,30/05/2022
 25010,Gayathri,12th,none,none
 55618,Gurtej Singh Bedi,12th,none,none
 39421,Hasan Mustafa Khan,12th,none,none
-34517,Juhi Panda,12th,none,none
+34517,Juhi Panda,12th,none,30/05/2022
 24014,Kanika Pandey,12th,none,none
 49521,Karan Dasari,12th,none,none
 31611,Keshav Seth,12th,none,none
-50710,Lakshya Chauhan,12th,none,none
+50710,Lakshya Chauhan,12th,rented,30/05/2022
 3710,Nishit Singhal,12th,none,none
 52213,Omkar Singh,12th,none,none
 1610,Parth Arora,12th,none,none
@@ -42,6 +42,6 @@ Addmission Number,Name,Class,Book Status,Return Date
 49317,Tanya Saini,12th,none,none
 46017,Vashnavi Trivedi,12th,none,none
 39821,Vivaan Takawale,12th,none,none
-6110,Rudransh Aggarwal,12th,none,none
+6110,Rudransh Aggarwal,12th,rented,24/05/2022
 12458,Jyoti aggarwal,12th,none,none
-15268,Brijesh Kumar,12th,none,30-05-2022
+15268,Brijesh Kumar,12th,rented,30/05/2022

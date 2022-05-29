@@ -1,6 +1,36 @@
 import csv
+from datetime import datetime
 
 # defined functions 
+
+def student_defaulter():
+
+    # used to check and print list and number of defaulters
+
+    with open("students.csv", "r") as file_read:
+        file_reader = csv.reader(file_read)
+        read = [i for i in file_reader]
+        defaulter = []    
+        count = 0
+
+        for entry in read:
+            date = (entry[4]).split('/')
+            try: # for checking is return date exists or not
+                d = datetime(int(date[2]),int(date[1]),int(date[0])) # converting from dd/mm/yyyy to yyyy/mm/dd
+            except:
+                continue
+            if d < datetime.today():
+                defaulter.append(entry)
+                count += 1
+                continue
+
+    print("Number of defaulters are: ", count)
+    
+    print("List of defaulters: ")
+    if count > 0:
+        print("NAME  CLASS  RETURN DATE")
+    for stud in defaulter:
+        print(stud[1], stud[2], stud[4])
 
 def student_checking(s):
 
@@ -228,7 +258,8 @@ while True: # to make sure continues running of program
             1.Add a new record
             2.Deleting a exsisting record
             3.Update a exsisting record
-            4.Return to previous menu
+            4.Print list of defaulters
+            5.Return to previous menu
             '''))
 
             if stud == 1:
@@ -248,6 +279,11 @@ while True: # to make sure continues running of program
                 print("--------------------------------------------------------------------------------")
 
             elif stud == 4:
+                print("--------------------------------------------------------------------------------")
+                student_defaulter()
+                print("--------------------------------------------------------------------------------")
+
+            elif stud == 5:
                 print("--------------------------------------------------------------------------------")
                 break 
 
