@@ -4,6 +4,9 @@ from datetime import datetime
 # defined functions 
 
 def student_rented():
+
+    # to print the list of all students who have rented a book
+
     with open("students.csv", 'r') as file_read:
         file_reader = csv.reader(file_read)
 
