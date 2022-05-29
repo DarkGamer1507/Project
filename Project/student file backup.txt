@@ -1,0 +1,47 @@
+Addmission Number,Name,Class,Book Status,Return Date
+39721,Aakash Nath Jha,12th,none,none
+51513,Achyut Pandey,12th,none,none
+15416,Aditya Malik,12th,none,none
+4820,Advay Singh,12th,none,none
+3010,Amodit Yadav,12th,none,none
+37113,Anandita Sharma,12th,none,none
+9910,Antriksh Mahato,12th,none,none
+52013,Arjun Singh,12th,none,none
+41920,Arnav Malik,12th,none,none
+51117,Ashwin Singh Slathia,12th,none,none
+55818,Batta,12th,none,none
+17510,Bhuwan Chandra Pandey,12th,none,none
+50919,Binayak Mohanta,12th,none,none
+49018,D Prem Kowshik,12th,none,none
+30011,Dhani Verma,12th,none,none
+4110,Divyansh Manav,12th,none,none
+25010,Gayathri,12th,none,none
+55618,Gurtej Singh Bedi,12th,none,none
+39421,Hasan Mustafa Khan,12th,none,none
+34517,Juhi Panda,12th,none,none
+24014,Kanika Pandey,12th,none,none
+49521,Karan Dasari,12th,none,none
+31611,Keshav Seth,12th,none,none
+50710,Lakshya Chauhan,12th,none,none
+3710,Nishit Singhal,12th,none,none
+52213,Omkar Singh,12th,none,none
+1610,Parth Arora,12th,none,none
+49318,Parth Arya Bhat,12th,none,none
+44121,Pragya,12th,none,none
+11919,Pranjal Mishra,12th,none,none
+48610,Prisha Jain,12th,none,none
+24019,Priyanshu Ranjan,12th,none,none
+22616,Pulkeet Dagar,12th,none,none
+28610,Rajat Yadav,12th,none,none
+42615,Rakshit,12th,none,none
+49211,Rakshit Yadav,12th,none,none
+6110,Rudransh Aggarwal,12th,rented,none
+2010,Sana Kaur Bhatia,12th,none,none
+15819,Shreya Menon,12th,none,none
+13014,Shreyansh Kumar,12th,none,none
+47117,Shubhangini Mehta,12th,none,none
+49317,Tanya Saini,12th,none,none
+46017,Vashnavi Trivedi,12th,none,none
+39821,Vivaan Takawale,12th,none,none
+15462,Lakshay Aggarwal,12th,none,none
+55423,Jyoti Aggarwal,11th,rented,none

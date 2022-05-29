@@ -1,0 +1,19 @@
+unit = int(input("Enter the number of units consumed: "))
+
+base = 200
+
+if unit <= 200:
+    rate = unit*1.5
+
+if unit > 200 and unit <= 300:
+    rate = unit*1.75
+
+if unit > 300 and unit <= 500:
+    rate = unit*2
+
+if unit > 500:
+    rate = unit*2.20
+
+bill = base + rate
+
+print("Bill is ", bill)
