@@ -1,21 +1,5 @@
 import csv
 
-def student_book(s):
-    ad_no = s[5]
-    with open("students.csv", 'r', newline='') as file1:
-        reader = csv.reader(file1)
-        read = [i for i in reader]
-
-    for j in read:
-        if ad_no == j[0]:
-            j[3] = 'none'
-            j[4] = 'none'    
-    
-    with open("students.csv", 'w', newline='') as file2:
-        writer = csv.writer(file2)
-        for k in read:
-            writer.writerow(k)
-
 def date_format():
 
     # used to make sure corrent formate of date is used for futher usage
@@ -33,6 +17,22 @@ def date_format():
             break
 
     return date
+
+def student_book(s):
+    ad_no = s[5]
+    with open("students.csv", 'r', newline='') as file1:
+        reader = csv.reader(file1)
+        read = [i for i in reader]
+
+    for j in read:
+        if ad_no == j[0]:
+            j[3] = 'none'
+            j[4] = 'none'    
+    
+    with open("students.csv", 'w', newline='') as file2:
+        writer = csv.writer(file2)
+        for k in read:
+            writer.writerow(k)
 
 def verifying_student(s):
     with open("students.csv", 'r', newline='') as file1:
