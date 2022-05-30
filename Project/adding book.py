@@ -2,13 +2,13 @@ import csv
 
 def book_add():
 
-    # used for adding a new entry to the student's database
+    # used for adding a new entry to the book's database
 
     print("ADDING A NEW BOOK")
     print("--------------------------------------------------------------------------------")
 
     l1 = []
-    check = 0 # to confirm if student is added or not
+    check = 0 # to confirm if book is added or not
 
     while True:
         l1.append(input("Serial Number: "))
@@ -43,8 +43,8 @@ def book_add():
 
 
     with open("books.csv", 'a', newline='') as file_books:
-        student_writer = csv.writer(file_books)
-        student_writer.writerow(l1)
+        book_writer = csv.writer(file_books)
+        book_writer.writerow(l1)
     
     if check != 0:
         print("\nBook Added!\n")
