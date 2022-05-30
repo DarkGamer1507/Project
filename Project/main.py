@@ -556,7 +556,6 @@ while True: # to make sure continues running of program
                 student_add()
                 print("-----------------------------------------------------")  
                         
-
             elif stud == 2:
                 print("-----------------------------------------------------")
                 student_delete()
@@ -584,6 +583,7 @@ while True: # to make sure continues running of program
             else:
                 print("\nSelect a Valid Option!\n")
                 continue
+
     elif choice == 2:
         while True:
             print("BOOKS DATABASE")
