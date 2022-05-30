@@ -51,9 +51,8 @@ def student_defaulter():
     
     print("List of defaulters: ")
     if count != 0:
-        print("NAME  CLASS  RETURN DATE")
         for stud in defaulter:
-            print(stud[1], stud[2], stud[4])
+            print("Name:",stud[1],"Class:", stud[2],"Return date:", stud[4])
 
 def student_checking(s):
 
@@ -230,8 +229,15 @@ def student_update():
                     elif what == 2:
                         while True:
                             updated = input("Current Book status (none/rented): ")
-                            if updated.lower() in("none", "rented"):
+                            if updated.lower() in("none"):
                                 j[3] = updated
+                                j[4] = 'none'
+                                print("\nBook Status Updated!\n")
+                                break
+                            elif updated.lower() in('rented'):
+                                j[3] = updated
+                                date = date_format()
+                                j[4] = date
                                 print("\nBook Status Updated!\n")
                                 break
                             else:
