@@ -63,7 +63,7 @@ def book_update():
 
     # used to update a existing record
     
-    print("UPDATING A EXSISTING BOOK ENTRY")
+    print("UPDATING A EXISTING BOOK ENTRY")
     print("-----------------------------------------------------")
     
     with open("books.csv", 'r', newline='') as file_read:
@@ -72,11 +72,11 @@ def book_update():
         S_no = input("Enter Serial Number of book:\n ")
         read = [i for i in file_read]
 
-        book = 0 # to check if mentioned book exsists in file
+        book = 0 # to check if mentioned book exists in file
 
         for j in read:
             if j[0] == S_no:
-                book += 1 # book exsists in file
+                book += 1 # book exists in file
                 print("Author: ", j[1], "\nName: ", j[2], "\nCurrently: ", j[4] )
                 up = input("Update? (y/n):\n ")
                 if up in ('y', 'Y'):
@@ -95,7 +95,7 @@ def book_update():
 
                             elif updated.lower() in('rented'):
                                 while True:
-                                    s = input("Rented by (student's addmission number):\n ")
+                                    s = input("Rented by (student's admission number):\n ")
                                     stud1,date1 = verifying_student(s)
                                     if stud1 in('break'):
                                         j[4] = updated
@@ -114,7 +114,7 @@ def book_update():
 
                     elif what == 2:
                         while True:
-                            s = input("Rented by (student's addmission number):\n ")
+                            s = input("Rented by (student's admission number):\n ")
                             stud2,date2 = verifying_student(s)
                             if stud2 in('break'):
                                 student_book(j)
@@ -157,7 +157,7 @@ def book_delete():
 
     # used to delete a existing record
 
-    print("DELETING A EXSISTING BOOK ENTRY")
+    print("DELETING A EXISTING BOOK ENTRY")
     print("-----------------------------------------------------")
 
     with open("books.csv", 'r', newline='') as file1:
@@ -219,17 +219,17 @@ def book_add():
         l1.append(input("Book name: "))
         l1.append(input("Genre: "))
         l1.append(input("Current Book Status (available/rented): "))
-        l1.append(input("Rented by (enter students addmission no. / none): "))
+        l1.append(input("Rented by (enter students admission no. / none): "))
         l1.append(date_format())
 
-        print("Addmission number:",l1[0] ,
+        print("admission number:",l1[0] ,
         "\nName:",l1[1] ,
         "\nClass:",l1[2] ,
         "\nGenre:",l1[3],
         "\nBook Status:",l1[4],
         "\nRented by:" ,l1[5],
         "\nReturn date:",l1[6]) 
-        # to make sure corrrect information has been inputed
+        # to make sure correct information has been inputted
 
         x = input("Continue (n/y): ")
 
@@ -322,7 +322,7 @@ def student_checking(s):
         check = [i for i in read]
 
         for j in check:
-            if j[0] == s[0] and j[2] == s[2]: # if addmission number and class of new entry matches an old one
+            if j[0] == s[0] and j[2] == s[2]: # if admission number and class of new entry matches an old one
                 print("\nThis student already exsits!\n")
                 return (1)
 
@@ -332,13 +332,13 @@ def student_delete():
 
     # used to delete a existing record
 
-    print("DELETING A EXSISTING STUDENT ENTRY")
+    print("DELETING A EXISTING STUDENT ENTRY")
     print("-----------------------------------------------------")
 
     with open("students.csv", 'r', newline='') as file1:
         file_read = csv.reader(file1)
             
-        add_no = input("Enter Addmission number of the student whose entry is to be deleted: ")
+        add_no = input("Enter admission number of the student whose entry is to be deleted: ")
         check = 0 # used to check if mentioned student exists in the database
         
         read = [i for i in file_read]
@@ -346,7 +346,7 @@ def student_delete():
         for j in read:
             if j[0] == add_no:
                 check += 1
-                print("Name: ", j[1],"\nClass: ", j[2]) # to confirm if the addmission number entered is correct or not
+                print("Name: ", j[1],"\nClass: ", j[2]) # to confirm if the admission number entered is correct or not
                 con = input("Delete this entry? (y/n) ")
                 if con in ('y','Y'):
                     read.remove(j)
@@ -380,7 +380,7 @@ def student_delete():
 
 def date_format():
 
-    # used to make sure corrent formate of date is used for futher usage
+    # used to make sure correct format of date is used for further usage
 
     while True:
         date = input("Enter Return Date (dd/mm/yyyy OR none): ")
@@ -407,18 +407,18 @@ def student_add():
     con2 = 0 # to confirm if student is added or not
 
     while True:
-        l1.append(input("Addmission Number: "))
+        l1.append(input("admission Number: "))
         l1.append(input("Name: "))
         l1.append(input("Class: "))
         l1.append(input("Current Book Status (none/rented): "))
         l1.append(date_format())
 
-        print("Addmission number:",l1[0] ,
+        print("admission number:",l1[0] ,
         "\nName:",l1[1] ,
         "\nClass:",l1[2] ,
         "\nBook Status:",l1[3], 
         "\nReturn date:",l1[4]) 
-        # to make sure corrrect information has been inputed
+        # to make sure correct information has been inputted
 
         x = input("Continue (n/y): ")
 
@@ -459,20 +459,20 @@ def student_update():
 
     # used to update a existing record
     
-    print("UPDATING A EXSISTING STUDENT ENTRY")
+    print("UPDATING A EXISTING STUDENT ENTRY")
     print("-----------------------------------------------------")
     
     with open("students.csv", 'r', newline='') as file_read:
         file_read = csv.reader(file_read)
 
-        ad = input("Enter Addmission Number of student: ")
+        ad = input("Enter admission Number of student: ")
         read = [i for i in file_read]
 
-        student = 0 # to check if mentioned student exsists in file
+        student = 0 # to check if mentioned student exists in file
 
         for j in read:
             if j[0] == ad:
-                student += 1 # student exsists in file
+                student += 1 # student exists in file
                 print("Name: ", j[1], "\nClass: ", j[2] )
                 up = input("Update? (y/n): ")
                 if up in ('y', 'Y'):
@@ -529,7 +529,7 @@ def student_update():
 # main program
 
 while True: # to make sure continues running of program
-    print("MAIN MENUE")
+    print("MAIN MENU")
     print("-----------------------------------------------------")
 
     choice = int(input('''SELECT ONE OF THE FUNCTIONS: 
@@ -544,8 +544,8 @@ while True: # to make sure continues running of program
             print("-----------------------------------------------------")
             stud = int(input('''SELECT ONE OF THE FUNCTIONS:
             1.Add a new record
-            2.Deleting a exsisting record
-            3.Update a exsisting record
+            2.Deleting a EXISTING record
+            3.Update a EXISTING record
             4.Print list of defaulters
             5.Print list of students who have rented
             6.Return to previous menu
@@ -590,8 +590,8 @@ while True: # to make sure continues running of program
             print("-----------------------------------------------------")
             stud = int(input('''SELECT ONE OF THE FUNCTIONS:
             1.Add a new record
-            2.Deleting a exsisting record
-            3.Update a exsisting record
+            2.Deleting a EXISTING record
+            3.Update a EXISTING record
             4.Return to previous menu
             '''))
 
