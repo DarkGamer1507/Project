@@ -74,7 +74,7 @@ def student_delete():
 
     # used to delete a existing record
 
-    print("DELETING A EXSISTING ENTRY")
+    print("DELETING A EXSISTING STUDENT ENTRY")
     print("--------------------------------------------------------------------------------")
 
     with open("students.csv", 'r', newline='') as file1:
@@ -122,7 +122,7 @@ def student_delete():
 
 def date_format():
 
-    # used to make sure corrent formate of date is used
+    # used to make sure corrent formate of date is used for futher usage
 
     while True:
         date = input("Enter Return Date (dd/mm/yyyy OR none): ")
@@ -142,7 +142,7 @@ def student_add():
 
     # used for adding a new entry to the student's database
 
-    print("ADDING A NEW ENTRY")
+    print("ADDING A NEW STUDENT")
     print("--------------------------------------------------------------------------------")
 
     l1 = []
@@ -201,7 +201,7 @@ def student_update():
 
     # used to update a existing record
     
-    print("UPDATING A EXSISTING ENTRY")
+    print("UPDATING A EXSISTING STUDENT ENTRY")
     print("--------------------------------------------------------------------------------")
     
     with open("students.csv", 'r', newline='') as file_read:

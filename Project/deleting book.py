@@ -4,7 +4,7 @@ def book_delete():
 
     # used to delete a existing record
 
-    print("DELETING A EXSISTING ENTRY")
+    print("DELETING A EXSISTING BOOK ENTRY")
     print("--------------------------------------------------------------------------------")
 
     with open("books.csv", 'r', newline='') as file1:
