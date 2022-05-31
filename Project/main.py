@@ -3,14 +3,56 @@ from datetime import datetime
 
 # defined functions 
 
+def book_rented():
+
+    # used to print the list of all rented books
+
+    with open("books.csv", 'r', newline='') as file1:
+        reader = csv.reader(file1)
+        read = [i for i in reader]
+
+    count = 0 # to check if any book is rented at all or not
+    rented = []
+    for ent in read:
+        if ent[4] == 'rented':
+            count += 1
+            rented.append(ent)
+
+    if count == 0:
+        print("\nNo book is currently rented")
+
+    if count!= 0:
+        print("\nList of all rented books: \n")
+        for entry in rented:
+            print(entry[2],' by ', entry[1],"\nRented by:",entry[5],'\nReturn date: ',entry[6] )
+
+def book_checking(s):
+
+    # used to check if a new added entry already exists in datebase or not
+
+    with open("books.csv", 'r') as file1:
+        
+        read = csv.reader(file1)
+        check = [i for i in read]
+
+        for j in check:
+            if j[0] == s[0]: # if serial number of new entry matches an old one
+                print("\nThis book already exsits!\n")
+                return (1)
+
+        return
+
 def book_serial_number():
+
+    # to find a book by its serial number
+
     with open('books.csv', 'r', newline='') as file1:
         reader = csv.reader(file1)
         read = [i for i in reader]
 
     S_no = input("Enter books serial number: ")
     S_no_list = []
-    count = 0
+    count = 0 # to check if book exists or not
 
     for entry in read:
         if entry[0] in(S_no):
@@ -30,13 +72,16 @@ def book_serial_number():
         return
 
 def book_name():
+
+    # to find a book by its name
+
     with open('books.csv', 'r', newline='') as file1:
         reader = csv.reader(file1)
         read = [i for i in reader]
 
     name = input("Enter books name: ")
     name_list = []
-    count = 0
+    count = 0 # to check if book exists or not
 
     for entry in read:
         if entry[2].lower() == name.lower():
@@ -56,13 +101,16 @@ def book_name():
         return
 
 def book_genre():
+
+    # used to print the list of all books of a genre
+
     with open('books.csv', 'r', newline='') as file1:
         reader = csv.reader(file1)
         read = [i for i in reader]
     
     genre_list = []
     genre = input("Enter genre: ")
-    count = 0
+    count = 0 # to check if books of a genre exists or not
 
     for entry in read:
         if entry[3].lower() == genre.lower():
@@ -73,7 +121,7 @@ def book_genre():
         print("\nNo books of ",genre," genre found.")
     
     if count != 0:
-        print("All the ",genre," books:")
+        print("\nAll the ",genre," books:")
         for ent in genre_list:
             print(ent[2]," by ",ent[1],"\nCurrently:",ent[4],'\n')
 
@@ -84,16 +132,19 @@ def book_genre():
         return
 
 def book_author():
+
+    # used to print the list of all the books of a author
+
     with open('books.csv', 'r', newline='') as file1:
         reader = csv.reader(file1)
         read = [i for i in reader]
     
     author_list = []
     author = input("Enter the name of author: ")
-    count = 0
+    count = 0 # to check if any books by the mentioned author exists or not
 
     for entry in read:
-        if entry[1].lower() == author.lower():
+        if entry[1].lower() in (author.lower()): # because python is case sensitive
             count += 1
             author_list.append(entry)
 
@@ -101,7 +152,7 @@ def book_author():
         print("\nNo works by ",author," found.")
     
     if count != 0:
-        print("All the works by ",author," :")
+        print("\nAll the works by ",author," :\n")
         for ent in author_list:
             print("Name:",ent[2],"\nCurrently:",ent[4],'\n')
 
@@ -112,6 +163,9 @@ def book_author():
         return
 
 def book_searching():
+
+    # used for searching a book from book's database
+
     while True:
         print("SEARCHING A BOOK")
         print("-----------------------------------------------------")
@@ -380,9 +434,14 @@ def book_add():
         x = input("Continue (n/y): ")
 
         if x in ('y', 'Y'):
-            check += 1
-            break
-            
+            check1 = student_checking(l1) # to check if the book already exists in database or not
+            if check1 == 1:
+                l1 = []
+                break
+            else:
+                check += 1
+                break
+
         else:
             con = input("\nRe-Enter data? (y/n)\n")
             if con in ('y', 'Y'):
@@ -423,7 +482,7 @@ def student_rented():
                 count += 1
                 rented.append(ent)
 
-        print("Number of students who have rented a book: ", count)
+        print("Number of students who have currently rented a book: ", count)
         
         if count != 0:
             print("List of students who have rented: ")
@@ -734,42 +793,49 @@ while True: # to make sure continues running of program
         while True:
             print("BOOKS DATABASE")
             print("-----------------------------------------------------")
-            stud = int(input('''SELECT ONE OF THE FUNCTIONS:
+            book = int(input('''SELECT ONE OF THE FUNCTIONS:
             1.Add a new record
-            2.Deleting a EXISTING record
-            3.Update a EXISTING record
+            2.Deleting a existing record
+            3.Update a existing record
             4.Search a book/books
-            4.Return to previous menu
+            5.To print the list of all rented books
+            5.Return to previous menu
             '''))
 
-            if stud == 1:
+            if book == 1:
                 print("-----------------------------------------------------")
                 book_add()
                 print("-----------------------------------------------------")  
                         
 
-            elif stud == 2:
+            elif book == 2:
                 print("-----------------------------------------------------")
                 book_delete()
                 print("-----------------------------------------------------")
 
-            elif stud == 3:
+            elif book == 3:
                 print("-----------------------------------------------------")
                 book_update()
                 print("-----------------------------------------------------")
 
-            elif stud == 4:
+            elif book == 4:
                 print("-----------------------------------------------------")
                 book_searching()
                 print("-----------------------------------------------------")
 
-            elif stud == 5:
+            elif book == 5:
                 print("-----------------------------------------------------")
-                break 
+                book_rented()
+                print("-----------------------------------------------------")
+
+            elif book == 6:
+                print("-----------------------------------------------------")
+                break
 
             else:
                 print("\nSelect a Valid Option!\n")
                 continue
+
     elif choice == 3:
         exit()
 
