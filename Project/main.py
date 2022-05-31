@@ -253,10 +253,10 @@ def verifying_student(s):
     if confirm == 0:
         return "none","none" # student doesnt exsits in database
 
-    elif confirm in('updated'): # student hasnt rented
+    elif confirm == 'updated': # student hasnt rented
         return "break", date
 
-    elif confirm in("rented"): # student has rented
+    elif confirm == "rented": # student has rented
         return "rented", "none"
 
 def book_update():
@@ -294,20 +294,21 @@ def book_update():
                                 break
 
                             elif updated.lower() in('rented'):
-                                while True:
-                                    s = input("Rented by (student's admission number):\n ")
-                                    stud1,date1 = verifying_student(s)
-                                    if stud1 in('break'):
-                                        j[4] = updated
-                                        j[5] = s
-                                        break
-                                    elif stud1 in('none'):
-                                        print("\nStudent does not exsits! Try again")
-                                        continue
-                                    elif stud1 in("rented"):
-                                        print("\nStudent already has rented!")
-                                        break
-                                j[6] = date1
+                                student_book(j)
+                                s = input("Rented by (student's admission number):\n ")
+                                stud1,date1 = verifying_student(s)
+                                if stud1 in('break'):
+                                    j[4] = updated
+                                    j[5] = s
+                                    j[6] = date1
+                                    break
+                                elif stud1 in('none'):
+                                    print("\nStudent does not exsits! Try again")
+                                    continue
+                                elif stud1 in("rented"):
+                                    print("\nStudent already has rented!")
+                                    break
+                                
                             else:
                                 print("\n Invalid status try again")
                                 continue   
@@ -422,7 +423,7 @@ def book_add():
         l1.append(input("Rented by (enter students admission no. / none): "))
         l1.append(date_format())
 
-        print("admission number:",l1[0] ,
+        print("\nserial number:",l1[0] ,
         "\nName:",l1[1] ,
         "\nClass:",l1[2] ,
         "\nGenre:",l1[3],
@@ -434,7 +435,7 @@ def book_add():
         x = input("Continue (n/y): ")
 
         if x in ('y', 'Y'):
-            check1 = student_checking(l1) # to check if the book already exists in database or not
+            check1 = book_checking(l1) # to check if the book already exists in database or not
             if check1 == 1:
                 l1 = []
                 break
@@ -451,11 +452,11 @@ def book_add():
                 l1 = []
                 break           
 
-
-    with open("books.csv", 'a', newline='') as file_books:
-        book_writer = csv.writer(file_books)
-        book_writer.writerow(l1)
-    
+    if check != 0:
+        with open("books.csv", 'a', newline='') as file_books:
+            book_writer = csv.writer(file_books)
+            book_writer.writerow(l1)
+        
     if check != 0:
         print("\nBook Added!\n")
         
@@ -799,7 +800,7 @@ while True: # to make sure continues running of program
             3.Update a existing record
             4.Search a book/books
             5.To print the list of all rented books
-            5.Return to previous menu
+            6.Return to previous menu
             '''))
 
             if book == 1:

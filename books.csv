@@ -34,7 +34,7 @@ Serial no.,Author,Name,Genre,Book Status,Rented by,return date
 452732,Ruskin Bond,Time Stops at Shamli,Children's fiction,available,none,none
 452733,Ruskin Bond,The Boy from the Hills,Children's fiction,available,none,none
 452734,Ruskin Bond,THE LUCKY BAT,Children's fiction,available,none,none
-452735,Ruskin Bond,Great Stories For Children,Children's fiction,available,none,none
+452735,Ruskin Bond,Great Stories For Children,Children's fiction,rented,4110,31/05/2022
 452736,Ruskin Bond,Landour Days : A writers Journal,Auto Biography,available,none,none
 452737,Ruskin Bond,Scenes from a Writer's Life,Auto Biography,available,none,none
 452738,Ruskin Bond,With Love From The Hills,Auto Biography,available,none,none
@@ -44,7 +44,7 @@ Serial no.,Author,Name,Genre,Book Status,Rented by,return date
 452742,Ruskin Bond,Coming Round the Mountain,Auto Biography,available,none,none
 452743,Ruskin Bond,A Song of India,Auto Biography,available,none,none
 452744,Ruskin Bond,All the roads lead to Ganga,Auto Biography,available,none,none
-452745,H.G. Wells,The War of the Worlds,Science Friction,available,none,none
+452745,H.G. Wells,The War of the Worlds,Science Friction,rented,15416,20/05/2022
 452746,H.G. Wells,The Time Machine,Science Friction,available,none,none
 452747,H.G. Wells,The Invisible Man,Science Friction,available,none,none
 452748,H.G. Wells,The Island of Dr Moreau,Science Friction,available,none,none
@@ -64,7 +64,7 @@ Serial no.,Author,Name,Genre,Book Status,Rented by,return date
 452762,H.G. Wells,A Short History of the World,Science Friction,available,none,none
 452763,H.G. Wells,A Modern Utopia,Science Friction,available,none,none
 452764,H.G. Wells,When the Sleeper Wakes,Science Friction,available,none,none
-452765,H.G. Wells,The Mammoth Book of 20th Century Ghost Stories,Science Friction,available,none,none
+452765,H.G. Wells,The Mammoth Book of 20th Century Ghost Stories,Science Friction,rented,34517,13/06/2022
 452766,H.G. Wells,Science Fiction Treasury: Six Complete Novels ,Science Friction,available,none,none
 452767,H.G. Wells,"The Country of the Blind, and Other Stories",Science Friction,available,none,none
 452768,H.G. Wells,The Food of the Gods and How It Came to Earth,Science Friction,available,none,none
@@ -84,7 +84,7 @@ Serial no.,Author,Name,Genre,Book Status,Rented by,return date
 452782,j.k. Rowling,Harry Potter And The Cursed Child: Parts One And Two,Fantasy,available,none,none
 452783,j.k. Rowling,Fantastic Beasts And Where To Find Them,Fantasy,available,none,none
 452784,j.k. Rowling,Fantastic Beasts: The Crimes Of Grindelwald,Fantasy,available,none,none
-452785,Stephen King,Carrie,Horror,available,none,none
+452785,Stephen King,Carrie,Horror,rented,24014,05/06/2022
 452786,Stephen King,'Salem's Lot,Horror,available,none,none
 452787,Stephen King,The Shining,Horror,available,none,none
 452788,Stephen King,Rage,Horror,available,none,none
@@ -97,5 +97,5 @@ Serial no.,Author,Name,Genre,Book Status,Rented by,return date
 452795,Stephen King,The Running Man,Horror,available,none,none
 452796,Stephen King,The Dark Tower: The Gunslinger,Horror,available,none,none
 452797,Stephen King,Christine,Horror,available,none,none
-452798,Stephen King,Pet Sematary,Horror,available,none,none
-452799,Stephen King,Cycle of the Werewolf,Horror,available,none,none
+452798,Stephen King,Pet Sematary,Horror,rented,47117,25/06/2022
+245681,jake henry ,The endless Cycle of life's misery,horror,available,none,none
