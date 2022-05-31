@@ -342,12 +342,12 @@ def book_update():
 
         if book == 0:
            print("\nBook not found\n")
-        
-    with open("books.csv", 'w', newline='') as file_write:   
-        file_write = csv.writer(file_write)
-        for x in (read):
-            file_write.writerow(x)
-
+    if book != 0:    
+        with open("books.csv", 'w', newline='') as file_write:   
+            file_write = csv.writer(file_write)
+            for x in (read):
+                file_write.writerow(x)
+        print("\nBook updated!")
     ext = input("Update another book? (y/n): \n")
     if ext in ('y', 'Y'):
         book_update()
