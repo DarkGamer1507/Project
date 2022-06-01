@@ -169,7 +169,7 @@ def book_searching():
     # used for searching a book from book's database
 
     while True:
-        print("\bSEARCHING A BOOK")
+        print("SEARCHING A BOOK")
         print("-----------------------------------------------------")
 
         method = int(input('''Select a method to find a book: 
@@ -265,7 +265,7 @@ def book_update():
 
     # used to update a existing record
     
-    print("\bUPDATING A EXISTING BOOK ENTRY")
+    print("UPDATING A EXISTING BOOK ENTRY")
     print("-----------------------------------------------------")
     
     with open("books.csv", 'r', newline='') as file_read:
@@ -295,7 +295,7 @@ def book_update():
 
                         elif updated.lower() in('rented'):
                             if j[4] == 'rented': # in case the user tries to change book status from rented to rented
-                                print("\n!Book is already rented (to change renter use \brenter function)")
+                                print("\n!Book is already rented (to change renter use renter function)")
                                 break
                             else:
                                 student_book(j)
@@ -365,7 +365,7 @@ def book_delete():
 
     # used to delete a existing record
 
-    print("\bDELETING A EXISTING BOOK ENTRY")
+    print("DELETING A EXISTING BOOK ENTRY")
     print("-----------------------------------------------------")
 
     with open("books.csv", 'r', newline='') as file1:
@@ -413,7 +413,7 @@ def book_add():
 
     # used for adding a new entry to the book's database
 
-    print("\bADDING A NEW BOOK")
+    print("ADDING A NEW BOOK")
     print("-----------------------------------------------------")
 
     l1 = []
@@ -492,10 +492,10 @@ def student_rented():
             count += 1
             rented.append(ent)
 
-    print("\n\bNumber of students who have currently rented a book: ", count)
+    print("\nNumber of students who have currently rented a book: ", count)
     
     if count != 0:
-        print("\bList of students who have rented: ")
+        print("List of students who have rented: ")
         for stud in rented:
             print("Name: ", stud[1], "Class: ", stud[2])
 
@@ -520,10 +520,10 @@ def student_defaulter():
             count += 1
             continue
 
-    print("\n\bNumber of defaulters are: ", count)
+    print("\nNumber of defaulters are: ", count)
     
     if count != 0:
-        print("\bList of defaulters: ")
+        print("List of defaulters: ")
         for stud in defaulter:
             print("Name:",stud[1],"Class:", stud[2],"Return date:", stud[4])
 
@@ -546,7 +546,7 @@ def student_delete():
 
     # used to delete a existing record
 
-    print("\bDELETING A EXISTING STUDENT ENTRY")
+    print("DELETING A EXISTING STUDENT ENTRY")
     print("-----------------------------------------------------")
 
     with open("students.csv", 'r', newline='') as file1:
@@ -676,7 +676,7 @@ def student_update():
 
     # used to update a existing record
     
-    print("\bUPDATING A EXISTING STUDENT ENTRY")
+    print("UPDATING A EXISTING STUDENT ENTRY")
     print("-----------------------------------------------------")
     
     with open("students.csv", 'r', newline='') as file_read:
@@ -746,7 +746,7 @@ def student_update():
 # main program
 
 while True: # to make sure continues running of program
-    print("\bMAIN MENU")
+    print("MAIN MENU")
     print("-----------------------------------------------------")
 
     choice = int(input('''SELECT ONE OF THE FUNCTIONS: 
@@ -757,7 +757,7 @@ while True: # to make sure continues running of program
 
     if choice == 1:
         while True:
-            print("\bSTUDENTS DATABASE")
+            print("STUDENTS DATABASE")
             print("-----------------------------------------------------")
             stud = int(input('''SELECT ONE OF THE FUNCTIONS:
             1.Add a new record
@@ -803,7 +803,7 @@ while True: # to make sure continues running of program
 
     elif choice == 2:
         while True:
-            print("\bBOOKS DATABASE")
+            print("BOOKS DATABASE")
             print("-----------------------------------------------------")
             book = int(input('''SELECT ONE OF THE FUNCTIONS:
             1.Add a new record
