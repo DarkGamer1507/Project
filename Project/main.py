@@ -36,7 +36,7 @@ def book_checking(s):
         check = [i for i in read]
 
         for j in check:
-            if j[0] == s[0]: # if serial number of new entry matches an old one
+            if j[0] == s[0] and j[1] == s[1] and j[2] == s[2]: # if serial number of new entry matches an old one
                 print("\nThis book already exsits!\n")
                 return (1)
 
@@ -62,6 +62,7 @@ def book_serial_number():
 
     if count == 0:
         print("\nBook not found!")
+        
     if count != 0:
         print(S_no_list[2], " by ", S_no_list[1], " \nCurrently: ", S_no_list[4])
 
@@ -90,6 +91,7 @@ def book_name():
 
     if count == 0:
         print("\nBook not found!")
+
     if count != 0:
         for ent in name_list:
             print(ent[2], " by ", ent[1], " \nCurrently: ", ent[4])
@@ -167,7 +169,7 @@ def book_searching():
     # used for searching a book from book's database
 
     while True:
-        print("SEARCHING A BOOK")
+        print("\bSEARCHING A BOOK")
         print("-----------------------------------------------------")
 
         method = int(input('''Select a method to find a book: 
@@ -201,7 +203,7 @@ def book_searching():
         elif method == 5:
             break
         else:
-            print("\nSelect a valid Option!")
+            print("\nSelect a valid Option!\n")
 
 def student_book(s):
 
@@ -246,9 +248,9 @@ def verifying_student(s):
                 break 
 
     with open('students.csv', 'w', newline='') as file2:
-                    writer = csv.writer(file2)
-                    for j in read:
-                        writer.writerow(j)
+        writer = csv.writer(file2)
+        for j in read:
+            writer.writerow(j)
 
     if confirm == 0:
         return "none","none" # student doesnt exsits in database
@@ -263,37 +265,39 @@ def book_update():
 
     # used to update a existing record
     
-    print("UPDATING A EXISTING BOOK ENTRY")
+    print("\bUPDATING A EXISTING BOOK ENTRY")
     print("-----------------------------------------------------")
     
     with open("books.csv", 'r', newline='') as file_read:
         file_read = csv.reader(file_read)
-
-        S_no = input("Enter Serial Number of book:\n ")
         read = [i for i in file_read]
 
-        book = 0 # to check if mentioned book exists in file
+    book = 0 # to check if mentioned book exists in file
+    S_no = input("Enter Serial Number of book:\n ")
+    for j in read:
+        if j[0] == S_no:
+            book += 1 # book exists in file
+            print("Author: ", j[1], "\nName: ", j[2], "\nCurrently: ", j[4] )
+            up = input("Update? (y/n):\n ")
+            if up in ('y', 'Y'):
+                what = int(input("Update: \n  1.Book Status \n  2.Renter \n  3.Return Date\n"))
 
-        for j in read:
-            if j[0] == S_no:
-                book += 1 # book exists in file
-                print("Author: ", j[1], "\nName: ", j[2], "\nCurrently: ", j[4] )
-                up = input("Update? (y/n):\n ")
-                if up in ('y', 'Y'):
-                    what = int(input("Update: \n  1.Book Status \n  2.Renter \n  3.Return Date\n"))
+                if what == 1:
+                    while True:
+                        updated = input("Updated Book Status (available/rented):\n ")
+                        if updated.lower() in('available'):
+                            student_book(j)
+                            j[4] = updated
+                            j[5] = 'none'
+                            j[6] = 'none'
+                            print("\nBook Status Updated!\n")
+                            break
 
-                    if what == 1:
-                        while True:
-                            updated = input("Updated Book Status (available/rented):\n ")
-                            if updated.lower() in('available'):
-                                student_book(j)
-                                j[4] = updated
-                                j[5] = 'none'
-                                j[6] = 'none'
-                                print("\nBook Status Updated!\n")
+                        elif updated.lower() in('rented'):
+                            if j[4] == 'rented': # in case the user tries to change book status from rented to rented
+                                print("\n!Book is already rented (to change renter use \brenter function)")
                                 break
-
-                            elif updated.lower() in('rented'):
+                            else:
                                 student_book(j)
                                 s = input("Rented by (student's admission number):\n ")
                                 stud1,date1 = verifying_student(s)
@@ -301,6 +305,7 @@ def book_update():
                                     j[4] = updated
                                     j[5] = s
                                     j[6] = date1
+                                    print("\nBook Status Updated!\n")
                                     break
                                 elif stud1 in('none'):
                                     print("\nStudent does not exsits! Try again")
@@ -308,47 +313,49 @@ def book_update():
                                 elif stud1 in("rented"):
                                     print("\nStudent already has rented!")
                                     break
-                                
-                            else:
-                                print("\n Invalid status try again")
-                                continue   
+                            
+                        else:
+                            print("\n Invalid status try again")
+                            continue   
 
-                    elif what == 2:
-                        while True:
-                            s = input("Rented by (student's admission number):\n ")
-                            stud2,date2 = verifying_student(s)
-                            if stud2 in('break'):
-                                student_book(j)
-                                j[5] = s
-                                break
-                            elif stud2 in('none'):
-                                print("Student does not exsits! Try again")
-                                continue
-                            elif stud2 in("rented"):
-                                print("\nStudent already has rented!")
-                                break
-                        j[6] = date2
-                        j[4] = 'rented'
+                elif what == 2:
+                    while True:
+                        s = input("Rented by (student's admission number):\n ")
+                        stud2,date2 = verifying_student(s)
+                        if stud2 in('break'):
+                            student_book(j)
+                            j[5] = s
+                            break
+                        elif stud2 in('none'):
+                            print("Student does not exsits! Try again")
+                            continue
+                        elif stud2 in("rented"):
+                            print("\nStudent already has rented!")
+                            break
+                    j[6] = date2
+                    j[4] = 'rented'
 
-                    elif what == 3:
-                        dat = date_format()
-                        j[6] = dat
-                        print("\nReturn Date Updated!\n")
+                elif what == 3:
+                    dat = date_format()
+                    j[6] = dat
+                    print("\nReturn Date Updated!\n")
 
-                    else:
-                        print("\nSelect a Valid Option!\n")    
                 else:
-                    break
+                    print("\nSelect a Valid Option!\n")    
+            else:
+                break
 
-        if book == 0:
-           print("\nBook not found\n")
+    if book == 0:
+        print("\nBook not found\n")
+
     if book != 0:    
         with open("books.csv", 'w', newline='') as file_write:   
             file_write = csv.writer(file_write)
             for x in (read):
                 file_write.writerow(x)
-        print("\nBook updated!")
-    ext = input("Update another book? (y/n): \n")
+        print("\nBook updated!\n")
+
+    ext = input("\nUpdate another book? (y/n): ")
     if ext in ('y', 'Y'):
         book_update()
     else:
@@ -358,47 +365,45 @@ def book_delete():
 
     # used to delete a existing record
 
-    print("DELETING A EXISTING BOOK ENTRY")
+    print("\bDELETING A EXISTING BOOK ENTRY")
     print("-----------------------------------------------------")
 
     with open("books.csv", 'r', newline='') as file1:
         file_read = csv.reader(file1)
-            
-        S_no = input("Enter Serial number of the book whose entry is to be deleted: ")
-        check = 0 # used to check if mentioned book exists in the database
-        
         read = [i for i in file_read]
 
-        for j in read:
-            if j[0] == S_no:
+    S_no = input("Enter Serial number of the book whose entry is to be deleted: ")
+    check = 0 # used to check if mentioned book exists in the database
+    for j in read:
+        if j[0] == S_no:
+            check += 1
+            print("Author: ", j[1],"\nName: ", j[2]) # to confirm if the serial number entered is correct or not
+            con = input("Delete this entry? (y/n): ")
+            if con in ('y','Y'):
+                read.remove(j)
+                break
+            else:
                 check += 1
-                print("Author: ", j[1],"\nName: ", j[2]) # to confirm if the serial number entered is correct or not
-                con = input("Delete this entry? (y/n) ")
-                if con in ('y','Y'):
-                    read.remove(j)
+                ext2 = input("\nTry again? (y/n)\n")
+                if ext2 in ('y', 'Y'):
+                    check = 'yes'
                     break
                 else:
-                    check += 1
-                    ext2 = input("\nTry again? (y/n)\n")
-                    if ext2 in ('y', 'Y'):
-                        check = 'yes'
-                        break
-                    else:
-                        check = 'yes'
+                    check = 'yes'
 
 
-        if check == 0:    
-            check = 'yes'    
-            print("\nBook Not found\n")
+    if check == 0:    
+        check = 'yes'    
+        print("\nBook Not found\n")
 
-    with open("books.csv", 'w', newline='') as file2:
-        file_write = csv.writer(file2)
-        for k in read:
-            file_write.writerow(k)
-        if check != 'yes':
-            print("\nEntry Deleted!\n ")
+    if check != 'yes':
+        with open("books.csv", 'w', newline='') as file2:
+            file_write = csv.writer(file2)
+            for k in read:
+                file_write.writerow(k)
+        print("\nEntry Deleted!\n ")
 
-    ext = input("Delete another entry? (y/n)")
+    ext = input("Delete another entry? (y/n): ")
     if ext in ('y', 'Y'):
         book_delete()
     else:
@@ -408,7 +413,7 @@ def book_add():
 
     # used for adding a new entry to the book's database
 
-    print("ADDING A NEW BOOK")
+    print("\bADDING A NEW BOOK")
     print("-----------------------------------------------------")
 
     l1 = []
@@ -419,11 +424,18 @@ def book_add():
         l1.append(input("Author: "))
         l1.append(input("Book name: "))
         l1.append(input("Genre: "))
-        l1.append(input("Current Book Status (available/rented): "))
-        l1.append(input("Rented by (enter students admission no. / none): "))
+        while True:
+            status = input("Current Book Status (available/rented): ") # to make sure input is correct for further use
+            if status in("available", 'rented'):
+                l1.append(status)
+                break
+            else:
+                print("\nEnter a valid status!")
+                continue
+        l1.append(input("Rented by (enter students admission no./none): "))
         l1.append(date_format())
 
-        print("\nserial number:",l1[0] ,
+        print("\nSerial number:",l1[0] ,
         "\nName:",l1[1] ,
         "\nClass:",l1[2] ,
         "\nGenre:",l1[3],
@@ -432,7 +444,7 @@ def book_add():
         "\nReturn date:",l1[6]) 
         # to make sure correct information has been inputted
 
-        x = input("Continue (n/y): ")
+        x = input("\nContinue (n/y): ")
 
         if x in ('y', 'Y'):
             check1 = book_checking(l1) # to check if the book already exists in database or not
@@ -456,11 +468,9 @@ def book_add():
         with open("books.csv", 'a', newline='') as file_books:
             book_writer = csv.writer(file_books)
             book_writer.writerow(l1)
-        
-    if check != 0:
         print("\nBook Added!\n")
         
-    cho = input("Add another entry? (y/n) ")
+    cho = input("\nAdd another entry? (y/n): ")
     if cho in ('y','Y'):
         book_add()
         
@@ -473,22 +483,21 @@ def student_rented():
 
     with open("students.csv", 'r') as file_read:
         file_reader = csv.reader(file_read)
-
         read = [i for i in file_reader]
-        rented = []
-        count = 0
 
-        for ent in read:
-            if (ent[3]).lower() == "rented":
-                count += 1
-                rented.append(ent)
+    rented = []
+    count = 0 # to count number of people who have rented a book
+    for ent in read:
+        if (ent[3]).lower() == "rented":
+            count += 1
+            rented.append(ent)
 
-        print("Number of students who have currently rented a book: ", count)
-        
-        if count != 0:
-            print("List of students who have rented: ")
-            for stud in rented:
-                print("Name: ", stud[1], "Class: ", stud[2])
+    print("\n\bNumber of students who have currently rented a book: ", count)
+    
+    if count != 0:
+        print("\bList of students who have rented: ")
+        for stud in rented:
+            print("Name: ", stud[1], "Class: ", stud[2])
 
 def student_defaulter():
 
@@ -497,24 +506,24 @@ def student_defaulter():
     with open("students.csv", "r") as file_read:
         file_reader = csv.reader(file_read)
         read = [i for i in file_reader]
-        defaulter = []    
-        count = 0
-
-        for entry in read:
-            date = (entry[4]).split('/')
-            try: # for checking is return date exists or not
-                d = datetime(int(date[2]),int(date[1]),int(date[0])) # converting from dd/mm/yyyy to yyyy/mm/dd
-            except:
-                continue
-            if d < datetime.today():
-                defaulter.append(entry)
-                count += 1
-                continue
-
-    print("Number of defaulters are: ", count)
     
-    print("List of defaulters: ")
+    defaulter = []    
+    count = 0 # to check number of defaulters
+    for entry in read:
+        date = (entry[4]).split('/')
+        try: # for checking is return date exists or not
+            d = datetime(int(date[2]),int(date[1]),int(date[0])) # converting from dd/mm/yyyy to yyyy/mm/dd 
+        except:
+            continue
+        if d < datetime.today():
+            defaulter.append(entry)
+            count += 1
+            continue
+
+    print("\n\bNumber of defaulters are: ", count)
+    
     if count != 0:
+        print("\bList of defaulters: ")
         for stud in defaulter:
             print("Name:",stud[1],"Class:", stud[2],"Return date:", stud[4])
 
@@ -523,62 +532,58 @@ def student_checking(s):
     # used to check if a new added entry already exists in datebase or not
 
     with open("students.csv", 'r') as file1:
-        
         read = csv.reader(file1)
         check = [i for i in read]
 
-        for j in check:
-            if j[0] == s[0] and j[2] == s[2]: # if admission number and class of new entry matches an old one
-                print("\nThis student already exsits!\n")
-                return (1)
+    for j in check:
+        if j[0] == s[0] and j[2] == s[2]: # if admission number and class of new entry matches an old one
+            print("\nThis student already exsits!\n")
+            return (1)
 
-        return
+    return
 
-def student_delete():
+def student_delete(): 
 
     # used to delete a existing record
 
-    print("DELETING A EXISTING STUDENT ENTRY")
+    print("\bDELETING A EXISTING STUDENT ENTRY")
     print("-----------------------------------------------------")
 
     with open("students.csv", 'r', newline='') as file1:
         file_read = csv.reader(file1)
-            
-        add_no = input("Enter admission number of the student whose entry is to be deleted: ")
-        check = 0 # used to check if mentioned student exists in the database
-        
         read = [i for i in file_read]
-
-        for j in read:
-            if j[0] == add_no:
+        
+    add_no = input("Enter admission number of the student whose entry is to be deleted: ")
+    check = 0 # used to check if mentioned student exists in the database
+    for j in read:
+        if j[0] == add_no:
+            check += 1
+            print("Name: ", j[1],"\nClass: ", j[2]) # to confirm if the admission number entered is correct or not
+            con = input("Delete this entry? (y/n) ")
+            if con in ('y','Y'):
+                read.remove(j)
+                break
+            else:
                 check += 1
-                print("Name: ", j[1],"\nClass: ", j[2]) # to confirm if the admission number entered is correct or not
-                con = input("Delete this entry? (y/n) ")
-                if con in ('y','Y'):
-                    read.remove(j)
+                ext2 = input("\nTry again? (y/n)\n")
+                if ext2 in ('y', 'Y'):
+                    check = 'yes'
                     break
                 else:
-                    check += 1
-                    ext2 = input("\nTry again? (y/n)\n")
-                    if ext2 in ('y', 'Y'):
-                        check = 'yes'
-                        break
-                    else:
-                        check = 'yes'
+                    check = 'yes'
 
+    if check == 0:    
+        check = 'yes'    
+        print("\nStudent Not found\n")
 
-        if check == 0:    
-            check = 'yes'    
-            print("\nStudent Not found\n")
+    if check != 'yes':
+        with open("students.csv", 'w', newline='') as file2:
+            file_write = csv.writer(file2)
+            for k in read:
+                file_write.writerow(k)
+                print("\nEntry Deleted!\n ")
 
-    with open("students.csv", 'w', newline='') as file2:
-        file_write = csv.writer(file2)
-        for k in read:
-            file_write.writerow(k)
-        if check != 'yes':
-            print("\nEntry Deleted!\n ")
-
-    ext = input("Delete another entry? (y/n)")
+    ext = input("\nDelete another entry? (y/n): ")
     if ext in ('y', 'Y'):
         student_delete()
     else:
@@ -594,7 +599,7 @@ def date_format():
             break
 
         elif len(date) != 10 or date[2] != '/' or date[5] != '/':
-            print("\nEnter Correct Formate date!\n")
+            print("\nEnter Correct Format date!\n")
             continue
             
         else:
@@ -606,7 +611,7 @@ def student_add():
 
     # used for adding a new entry to the student's database
 
-    print("ADDING A NEW STUDENT")
+    print("\nADDING A NEW STUDENT")
     print("-----------------------------------------------------")
 
     l1 = []
@@ -616,20 +621,27 @@ def student_add():
         l1.append(input("admission Number: "))
         l1.append(input("Name: "))
         l1.append(input("Class: "))
-        l1.append(input("Current Book Status (none/rented): "))
+        while True: # to make sure input is correct for future use
+            status = input("Current Book Status (none/rented): ")
+            if status in('none', 'rented'):
+                l1.append(status)
+                break
+            else:
+                print('\nEnter a valid status!')
+                continue
         l1.append(date_format())
 
-        print("admission number:",l1[0] ,
+        print("Admission number:",l1[0] ,
         "\nName:",l1[1] ,
         "\nClass:",l1[2] ,
         "\nBook Status:",l1[3], 
         "\nReturn date:",l1[4]) 
         # to make sure correct information has been inputted
 
-        x = input("Continue (n/y): ")
+        x = input("\nContinue (n/y): ")
 
         if x in ('y', 'Y'):
-            check = student_checking(l1)
+            check = student_checking(l1) # to make sure new student is already not added
             if check == 1:
                 l1 = []
                 break
@@ -646,7 +658,6 @@ def student_add():
                 l1 = []
                 break           
 
-
     with open("students.csv", 'a', newline='') as file_students:
         student_writer = csv.writer(file_students)
         student_writer.writerow(l1)
@@ -654,7 +665,7 @@ def student_add():
     if con2 != 0:
         print("\nStudent Added!\n")
         
-    cho = input("Add another entry? (y/n) ")
+    cho = input("\nAdd another entry? (y/n): ")
     if cho in ('y','Y'):
         student_add()
         
@@ -665,7 +676,7 @@ def student_update():
 
     # used to update a existing record
     
-    print("UPDATING A EXISTING STUDENT ENTRY")
+    print("\bUPDATING A EXISTING STUDENT ENTRY")
     print("-----------------------------------------------------")
     
     with open("students.csv", 'r', newline='') as file_read:
@@ -674,59 +685,59 @@ def student_update():
         ad = input("Enter admission Number of student: ")
         read = [i for i in file_read]
 
-        student = 0 # to check if mentioned student exists in file
+    student = 0 # to check if mentioned student exists in file
 
-        for j in read:
-            if j[0] == ad:
-                student += 1 # student exists in file
-                print("Name: ", j[1], "\nClass: ", j[2] )
-                up = input("Update? (y/n): ")
-                if up in ('y', 'Y'):
-                    what = int(input("Update: \n  1.Class \n  2.Book Status \n  3.Return Date\n"))
+    for j in read:
+        if j[0] == ad:
+            student += 1 # student exists in file
+            print("Name: ", j[1], "\nClass: ", j[2] )
+            up = input("\nUpdate? (y/n): ")
+            if up in ('y', 'Y'):
+                what = int(input("Update: \n  1.Class \n  2.Book Status \n  3.Return Date\n"))
 
-                    if what == 1:
-                       updated = input("Updated Class: ")
-                       j[2] = updated
-                       print("\nClass Updated!\n")
-                       break
-                
-                    elif what == 2:
-                        while True:
-                            updated = input("Current Book status (none/rented): ")
-                            if updated.lower() in("none"):
-                                j[3] = updated
-                                j[4] = 'none'
-                                print("\nBook Status Updated!\n")
-                                break
-                            elif updated.lower() in('rented'):
-                                j[3] = updated
-                                date = date_format()
-                                j[4] = date
-                                print("\nBook Status Updated!\n")
-                                break
-                            else:
-                                print("\nEnter a Valid Status!\n")
-                                continue
-
-                    elif what == 3:
-                        dat = date_format()
-                        j[4] = dat
-                        print("\nReturn Date Updated!\n")
-
-                    else:
-                        print("\nSelect a Valid Option!\n")    
-                else:
+                if what == 1:
+                    updated = input("Updated Class: ")
+                    j[2] = updated
+                    print("\nClass Updated!\n")
                     break
+            
+                elif what == 2:
+                    while True:
+                        updated = input("Current Book status (none/rented): ")
+                        if updated.lower() in("none"):
+                            j[3] = updated
+                            j[4] = 'none'
+                            print("\nBook Status Updated!\n")
+                            break
+                        elif updated.lower() in('rented'):
+                            j[3] = updated
+                            date = date_format()
+                            j[4] = date
+                            print("\nBook Status Updated!\n")
+                            break
+                        else:
+                            print("\nEnter a Valid Status!\n")
+                            continue
 
-        if student == 0:
-           print("\nStudent not found\n")
+                elif what == 3:
+                    dat = date_format()
+                    j[4] = dat
+                    print("\nReturn Date Updated!\n")
+
+                else:
+                    print("\nSelect a Valid Option!\n")    
+            else:
+                break
+
+    if student == 0:
+        print("\nStudent not found\n")
         
     with open("students.csv", 'w', newline='') as file_write:   
         file_write = csv.writer(file_write)
         for x in (read):
             file_write.writerow(x)
 
-    ext = input("Update another student? (y/n)")
+    ext = input("\nUpdate another student? (y/n)")
     if ext in ('y', 'Y'):
         student_update()
     else:
@@ -735,7 +746,7 @@ def student_update():
 # main program
 
 while True: # to make sure continues running of program
-    print("MAIN MENU")
+    print("\bMAIN MENU")
     print("-----------------------------------------------------")
 
     choice = int(input('''SELECT ONE OF THE FUNCTIONS: 
@@ -746,7 +757,7 @@ while True: # to make sure continues running of program
 
     if choice == 1:
         while True:
-            print("STUDENTS DATABASE")
+            print("\bSTUDENTS DATABASE")
             print("-----------------------------------------------------")
             stud = int(input('''SELECT ONE OF THE FUNCTIONS:
             1.Add a new record
@@ -792,7 +803,7 @@ while True: # to make sure continues running of program
 
     elif choice == 2:
         while True:
-            print("BOOKS DATABASE")
+            print("\bBOOKS DATABASE")
             print("-----------------------------------------------------")
             book = int(input('''SELECT ONE OF THE FUNCTIONS:
             1.Add a new record
