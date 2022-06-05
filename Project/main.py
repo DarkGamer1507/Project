@@ -621,21 +621,18 @@ def student_add():
         l1.append(input("admission Number: "))
         l1.append(input("Name: "))
         l1.append(input("Class: "))
-        while True: # to make sure input is correct for future use
-            status = input("Current Book Status (none/rented): ")
-            if status in('none', 'rented'):
-                l1.append(status)
-                break
-            else:
-                print('\nEnter a valid status!')
-                continue
-        l1.append(date_format())
+        l1.append('none')             
+        l1.append('none')      #by default a new entry has no book rented 
+        l1.append('none')
+
 
         print("Admission number:",l1[0] ,
         "\nName:",l1[1] ,
         "\nClass:",l1[2] ,
         "\nBook Status:",l1[3], 
-        "\nReturn date:",l1[4]) 
+        "\nRented book:",l1[5],
+        "\nReturn date:",l1[4],
+        "\n(by default new entries have no rented book)") 
         # to make sure correct information has been inputted
 
         x = input("\nContinue (n/y): ")
