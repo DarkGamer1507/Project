@@ -205,6 +205,28 @@ def book_searching():
         else:
             print("\nSelect a valid Option!\n")
 
+def book_student(s):
+
+    # when the book status of student is updated to 'available' , 
+    # it updates rented book's status to availabe
+
+    book_no = s[5]
+    print(book_no)
+    with open("books.csv", 'r', newline='') as file1:
+        reader = csv.reader(file1)
+        read = [i for i in reader]
+
+    for j in read:
+        if book_no == j[0]:
+            j[4] = 'available'
+            j[5] = 'none'
+            j[6] = 'none'    
+    
+    with open("books.csv", 'w', newline='') as file2:
+        writer = csv.writer(file2)
+        for k in read:
+            writer.writerow(k)
+
 def student_book(s):
 
     # when only the renter of book changes, it updates previous oweners book status and return date
@@ -702,8 +724,10 @@ def student_update():
                     while True:
                         updated = input("Current Book status (none/rented): ")
                         if updated.lower() in("none"):
+                            book_student(j)
                             j[3] = updated
                             j[4] = 'none'
+                            j[5] = 'none'
                             print("\nBook Status Updated!\n")
                             break
                         elif updated.lower() in('rented'):
