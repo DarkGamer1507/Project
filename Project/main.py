@@ -94,7 +94,7 @@ def book_name():
 
     if count != 0:
         for ent in name_list:
-            print(ent[2], " by ", ent[1], " \nCurrently: ", ent[4])
+            print("S.no:",ent[0],ent[2], " by ", ent[1], " \nCurrently: ", ent[4])
 
     ext = input("\nFind another book? (y/n): ")
     if ext in ("y", 'Y'):
@@ -125,7 +125,7 @@ def book_genre():
     if count != 0:
         print("\nAll the ",genre," books:")
         for ent in genre_list:
-            print(ent[2]," by ",ent[1],"\nCurrently:",ent[4],'\n')
+            print("S.no:",ent[0],ent[2]," by ",ent[1],"\nCurrently:",ent[4],'\n')
 
     ext = input("\nFind books of another genre? (y/n): ")
     if ext in ("y", 'Y'):
@@ -156,7 +156,7 @@ def book_author():
     if count != 0:
         print("\nAll the works by ",author," :\n")
         for ent in author_list:
-            print("Name:",ent[2],"\nCurrently:",ent[4],'\n')
+            print("S.no:",ent[0],"Name:",ent[2],"\nCurrently:",ent[4],'\n')
 
     ext = input("\nFind works by another author? (y/n): ")
     if ext in ("y", 'Y'):
