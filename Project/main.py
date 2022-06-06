@@ -207,11 +207,10 @@ def book_searching():
 
 def book_student(s):
 
-    # when the book status of student is updated to 'available' , 
-    # it updates rented book's status to availabe
+    # when the book status of student is updated to 'available' ,it updates rented book's status to availabe
+    # also used to update book when only rented book is changed
 
     book_no = s[5]
-    print(book_no)
     with open("books.csv", 'r', newline='') as file1:
         reader = csv.reader(file1)
         read = [i for i in reader]
@@ -240,13 +239,52 @@ def student_book(s):
         if ad_no == j[0]:
             j[3] = 'none'
             j[4] = 'none'    
+            j[5] = 'none'
     
     with open("students.csv", 'w', newline='') as file2:
         writer = csv.writer(file2)
         for k in read:
             writer.writerow(k)
 
-def verifying_student(s):
+def verifying_book(s,p):
+
+    # used to verify if book exists, or is it already rented or is it not
+    # also if book is rented mentioned student, it also updates return date
+
+    with open("books.csv", 'r', newline='') as file1:
+        reader = csv.reader(file1)
+        read = [i for i in reader]
+
+    confirm = 0 # to confirm if rented or not or is exists
+    for book in read:
+        if book[0] == s:
+            if book[4].lower() in('available'):
+                book[4] = 'rented' # book isnt rented
+                book[5] = p
+                date = date_format()
+                book[6] = date
+                confirm = 'updated'
+                break
+                
+            else:
+                confirm = 'rented' # book is rented
+                break 
+
+    with open('books.csv', 'w', newline='') as file2:
+        writer = csv.writer(file2)
+        for j in read:
+            writer.writerow(j)
+
+    if confirm == 0:
+        return 0, 0 # book doesnt exsits in database
+
+    elif confirm == 'updated': # book isnt rented
+        return 1 , date
+
+    elif confirm == "rented": # book is rented
+        return 3 , "none"
+
+def verifying_student(s,p):
 
     # used to verify if students exists, or has he already rented or has he not
     # also if student has rented mentioned book, it also updates return date
@@ -255,13 +293,14 @@ def verifying_student(s):
         reader = csv.reader(file1)
         read = [i for i in reader]
 
-    confirm = '0' # to confirm if rented or not or is exists
+    confirm = 0 # to confirm if rented or not or is exists
     for stud in read:
         if stud[0] == s:
             if stud[3].lower() in('none'):
                 stud[3] = 'rented' # student hasnt rented
                 date = date_format()
                 stud[4] = date
+                stud[5] = p
                 confirm = 'updated'
                 break
                 
@@ -320,10 +359,10 @@ def book_update():
                                 print("\n!Book is already rented (to change renter use renter function)")
                                 break
                             else:
-                                student_book(j)
                                 s = input("Rented by (student's admission number):\n ")
-                                stud1,date1 = verifying_student(s)
+                                stud1,date1 = verifying_student(s,j[0])
                                 if stud1 in('break'):
+                                    student_book(j)
                                     j[4] = updated
                                     j[5] = s
                                     j[6] = date1
@@ -343,7 +382,7 @@ def book_update():
                 elif what == 2:
                     while True:
                         s = input("Rented by (student's admission number):\n ")
-                        stud2,date2 = verifying_student(s)
+                        stud2,date2 = verifying_student(s,j[0])
                         if stud2 in('break'):
                             student_book(j)
                             j[5] = s
@@ -446,16 +485,9 @@ def book_add():
         l1.append(input("Author: "))
         l1.append(input("Book name: "))
         l1.append(input("Genre: "))
-        while True:
-            status = input("Current Book Status (available/rented): ") # to make sure input is correct for further use
-            if status in("available", 'rented'):
-                l1.append(status)
-                break
-            else:
-                print("\nEnter a valid status!")
-                continue
-        l1.append(input("Rented by (enter students admission no./none): "))
-        l1.append(date_format())
+        l1.append('available')
+        l1.append('none')       #by default a new entry hasnt been rented by anyone at the time of adding the entry
+        l1.append('none')
 
         print("\nSerial number:",l1[0] ,
         "\nName:",l1[1] ,
@@ -463,7 +495,8 @@ def book_add():
         "\nGenre:",l1[3],
         "\nBook Status:",l1[4],
         "\nRented by:" ,l1[5],
-        "\nReturn date:",l1[6]) 
+        "\nReturn date:",l1[6],
+        "\n(by default a new book is not rented by anyone)") 
         # to make sure correct information has been inputted
 
         x = input("\nContinue (n/y): ")
@@ -712,7 +745,8 @@ def student_update():
             print("Name: ", j[1], "\nClass: ", j[2] )
             up = input("\nUpdate? (y/n): ")
             if up in ('y', 'Y'):
-                what = int(input("Update: \n  1.Class \n  2.Book Status \n  3.Return Date\n"))
+                print("\nCurrent class:",j[2],"\nCurrent Book status:",j[3],"\nCurrently rented book:",j[5],"\nCurrent return date:",j[4],'\n')
+                what = int(input("Update: \n  1.Class \n  2.Book Status \n  3.Rented Book\n  4.Return Date\n  "))
 
                 if what == 1:
                     updated = input("Updated Class: ")
@@ -730,19 +764,47 @@ def student_update():
                             j[5] = 'none'
                             print("\nBook Status Updated!\n")
                             break
+
                         elif updated.lower() in('rented'):
-                            j[3] = updated
-                            date = date_format()
-                            j[4] = date
-                            print("\nBook Status Updated!\n")
-                            break
+                            s = input("Rented book (book's serial number):\n ")
+                            stud1,date1 = verifying_book(s,j[0])
+                            if stud1 == 1:
+                                book_student(j)
+                                j[3] = updated
+                                j[5] = s
+                                j[4] = date1
+                                print("\nBook Status Updated!\n")
+                                break
+                            elif stud1 == 0:
+                                print("\nBook does not exsits! Try again")
+                                continue
+                            elif stud1 == 3:
+                                print("\nBook is already rented!")
+                                break
+
                         else:
                             print("\nEnter a Valid Status!\n")
                             continue
 
                 elif what == 3:
-                    dat = date_format()
-                    j[4] = dat
+                    s = input("Rented book (book's serial number):\n ")
+                    stud2,date2 = verifying_book(s,j[0])
+                    if stud2 == 1:
+                        book_student(j)
+                        j[3] = 'rented'
+                        j[5] = s
+                        j[4] = date2
+                        print("\nBook Status Updated!\n")
+                        break
+                    elif stud2 == 0:
+                        print("\nBook does not exsits! Try again")
+                        continue
+                    elif stud2 == 3:
+                        print("\nBook is already rented!")
+                        break
+                
+                elif what == 4:
+                    j[4] = date_format()
                     print("\nReturn Date Updated!\n")
 
                 else:

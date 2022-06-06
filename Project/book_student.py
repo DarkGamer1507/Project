@@ -11,7 +11,7 @@ def book_student(s):
         read = [i for i in reader]
 
     for j in read:
-        if int(book_no) == int(j[0]):
+        if book_no== j[0]:
             j[4] = 'available'
             j[5] = 'none'
             j[6] = 'none'    
