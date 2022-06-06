@@ -834,7 +834,7 @@ while True: # to make sure continues running of program
     choice = int(input('''SELECT ONE OF THE FUNCTIONS: 
     1.Students database
     2.Books database
-    3.exit
+    3.Exit
     '''))
 
     if choice == 1:
