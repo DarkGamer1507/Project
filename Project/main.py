@@ -733,10 +733,9 @@ def student_update():
     
     with open("students.csv", 'r', newline='') as file_read:
         file_read = csv.reader(file_read)
-
-        ad = input("Enter admission Number of student: ")
         read = [i for i in file_read]
 
+    ad = input("Enter admission Number of student:\n")
     student = 0 # to check if mentioned student exists in file
 
     for j in read:
