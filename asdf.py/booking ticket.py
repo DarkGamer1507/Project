@@ -62,10 +62,17 @@ def booking():
             else:
                 l1 = []
                 break
+    flight_no = flight_ticket(l1)
+    if flight_no:
+        l1.append(flight_no)
 
+    
     with open("booking.csv", 'a', newline="") as file1:
         write = csv.writer(file1)
         write.writerow(l1)
+
+    print("\nTicket Booked!")
+    print("\n Your Ticket no. is: ", l1[0])
 
     conti = input("book another? (y/n)")
     if conti in('y','Y'):
@@ -73,55 +80,40 @@ def booking():
     else:
         return
 
-def cancel():
-    with open("booking.csv", 'r', newline='') as file1:
+def flight_ticket(s):
+    with open("flight.csv", 'r', newline='') as file1:
         reader = csv.reader(file1)
         read = [i for i in reader]
-
-    ent = []
-    tick = input("Enter ticket number")
-    check = 0
     
-    for entry in read:
-        if entry[0] == tick:
-            check += 1
-            print("name:", entry[1])
-            con = input("cancel ticket? (y/n)\n(refund will be generated only before 72 hrs)\n")
-            if con in('y','Y'):    
-                ent.append(entry)
-                read.remove(entry)
-            else:
+    count = 0
+    flight = []
+    for j in read:
+        if j[3] == s[4] and j[4] == s[5] and j[5] == s[6] and j[2] > s[2]:
+            flight.append(j)
+    
+    while True:
+        for k in flight:
+            print(k)
+
+        sel = input("Select a flight (enter flight no.):")
+
+        for ent in flight:
+            if ent[0] == sel:
+                count += 1
                 break
-
-
-    for k in ent:
-        date = (k[4]).split('/')
-    
-        d = datetime(int(date[2]),int(date[1]),int(int(date[0]) - 3))
-            
-        if datetime.today() <= d :
-            print("refund is generated")
-            break
-        else:
-            print("refund not possible, ticket will only be cancelled")
-            break
         
-    if check != 0:
-        with open("booking.csv", 'w', newline='') as file2:
-            writer = csv.writer(file2)
-            for j in read:
-                writer.writerow(j)
-        print("Ticket Cancelled!")
-        
-    if check == 0:
-        print("no passenger with",tick, "ticket number found")
+        if count == 0:
+            print("Select a valid flight!")
+            continue    
+        break    
 
-    conti = input("cancel another? (y/n)")
-    if conti in('y','Y'):
-        cancel()
-    else:
-        return
-       
+
+        
+    for l in flight:
+        if sel == l[0]:
+            l[2] = int(l[2]) - int(s[2])
+            return l[0]
+
+
 # main function
-
-cancel()
+booking()

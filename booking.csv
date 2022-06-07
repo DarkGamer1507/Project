@@ -1,6 +1,6 @@
-ticket no, name,number of seats,class,date of departure,starting city,emding city
-1,rud,5,eco,15/02/2022,delhi,mumbai
-2,ru,1,eco,12/02/0222,delhi,mumbai
-3,sadas,4,first,25/02/2022,delhi,mumbai
-4,sdadfa,6,eco,15/02/5005, delhi,mumbai
-7,asda,5,eco,25/07/2022,delhi,mumbai
+ticket no, name,number of seats,class,date of departure,starting city,ending city,flight no.
+1,rud,5,eco,15/02/2022,delhi,mumbai,
+2,ru,1,eco,12/02/0222,delhi,mumbai,
+3,sadas,4,first,25/02/2022,delhi,mumbai,
+4,sdadfa,6,eco,15/02/5005, delhi,mumbai,
+7,asda,5,eco,25/07/2022,delhi,mumbai,
