@@ -27,6 +27,7 @@ def ticket_no():
 
 def booking():
     l1 = []
+    count = 0
     while True:
         l1.append(ticket_no())
         l1.append(input("Enter name: "))
@@ -62,17 +63,22 @@ def booking():
             else:
                 l1 = []
                 break
+
     flight_no = flight_ticket(l1)
-    if flight_no:
+    if flight_no != 'none':
         l1.append(flight_no)
+        count += 1
+    else:
+        l1= []
+        count = 0
 
-    
-    with open("booking.csv", 'a', newline="") as file1:
-        write = csv.writer(file1)
-        write.writerow(l1)
+    if count != 0:
+        with open("booking.csv", 'a', newline="") as file1:
+            write = csv.writer(file1)
+            write.writerow(l1)
 
-    print("\nTicket Booked!")
-    print("\n Your Ticket no. is: ", l1[0])
+        print("\nTicket Booked!")
+        print("\n Your Ticket no. is: ", l1[0])
 
     conti = input("book another? (y/n)")
     if conti in('y','Y'):
@@ -84,14 +90,20 @@ def flight_ticket(s):
     with open("flight.csv", 'r', newline='') as file1:
         reader = csv.reader(file1)
         read = [i for i in reader]
-    
+
     count = 0
+    ct = 0
     flight = []
     for j in read:
-        if j[3] == s[4] and j[4] == s[5] and j[5] == s[6] and j[2] > s[2]:
-            flight.append(j)
+        if j[3] == s[4]:
+            if j[4].lower() == s[5].lower():
+                if j[5].lower() == s[6].lower():
+                    if j[2] > s[2]:
+                        count += 1
+                        flight.append(j)
+
     
-    while True:
+    while ct == 0 and count != 0:
         for k in flight:
             print(k)
 
@@ -99,21 +111,29 @@ def flight_ticket(s):
 
         for ent in flight:
             if ent[0] == sel:
+                print ("ok")
                 count += 1
+                ct += 1
                 break
-        
-        if count == 0:
-            print("Select a valid flight!")
-            continue    
-        break    
+        if ct == 0:
+            print("Select a valid flight!")    
+            
 
 
-        
-    for l in flight:
-        if sel == l[0]:
+    if count == 0:
+        print ("No flight found")
+        return 'none'   
+    
+    for l in read:
+        if l[0] == sel:
             l[2] = int(l[2]) - int(s[2])
-            return l[0]
-
+            
+    with open("flight.csv" , 'w', newline='') as file2:
+        writer = csv.writer(file2)
+        for entry in read:
+            writer.writerow(entry)       
+    
+    return sel
 
 # main function
 booking()
