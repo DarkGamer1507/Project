@@ -18,8 +18,10 @@ def ticket_no():
         read = [i for i in reader]
 
     last = read.pop()
-
-    ticket = int(last[0])
+    if last == int:
+        ticket = int(last[0])
+    else:
+        ticket = 0
 
     new_no = ticket + 1
 
@@ -45,18 +47,18 @@ def booking():
         l1.append(input("Starting city: "))
         l1.append(input("Ending city: "))
 
-        print("name:",l1[1])
+        print("\nname:",l1[1])
         print("number of seats:",l1[2])
         print("class:",l1[3])
         print("date of departure:",l1[4])
         print("starting city:",l1[5])
         print("ending city:",l1[6])
         
-        con = input("Continue? (y/n): ")
+        con = input("\nContinue? (y/n): \n")
         if con in('y','Y'):
             break
         else:
-            con2 = input("Enter details again? (y/n): ")
+            con2 = input("\nEnter details again? (y/n): \n")
             if con2 in('y','Y'):
                 l1 = []
                 continue
@@ -80,7 +82,7 @@ def booking():
         print("\nTicket Booked!")
         print("\n Your Ticket no. is: ", l1[0])
 
-    conti = input("book another? (y/n)")
+    conti = input("\nbook another? (y/n)\n")
     if conti in('y','Y'):
         booking()
     else:
@@ -96,8 +98,8 @@ def flight_ticket(s):
     flight = []
     for j in read:
         if j[3] == s[4]:
-            if j[4].lower() == s[5].lower():
-                if j[5].lower() == s[6].lower():
+            if (j[4].lower()) == (s[5].lower()):
+                if (j[5].lower()) == (s[6].lower()):
                     if j[2] > s[2]:
                         count += 1
                         flight.append(j)
@@ -107,7 +109,7 @@ def flight_ticket(s):
         for k in flight:
             print(k)
 
-        sel = input("Select a flight (enter flight no.):")
+        sel = input("\nSelect a flight (enter flight no.): ")
 
         for ent in flight:
             if ent[0] == sel:
@@ -116,12 +118,12 @@ def flight_ticket(s):
                 ct += 1
                 break
         if ct == 0:
-            print("Select a valid flight!")    
+            print("\nSelect a valid flight!\n")    
             
 
 
     if count == 0:
-        print ("No flight found")
+        print ("\nNo flight found\n")
         return 'none'   
     
     for l in read:
