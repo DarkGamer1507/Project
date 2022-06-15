@@ -18,6 +18,7 @@ def cancel():
             if con in('y','Y'):    
                 ent.append(entry)
                 read.remove(entry)
+                cancel_(entry)
             else:
                 break
 
@@ -49,4 +50,19 @@ def cancel():
         cancel()
     else:
         return
-       
+
+def cancel_(s):
+    with open("flight.csv", 'r', newline='') as file1:
+        reader = csv.reader(file1)
+        read = [i for i in reader]
+
+    for j in read:
+        if j[0] == s[7]:
+            j[2] = int(j[2]) + int(s[2])
+
+    with open("flight.csv", 'w', newline='') as file2:
+        writer = csv.writer(file2)
+        for k in read:
+            writer.writerow(k)
+
+cancel()
