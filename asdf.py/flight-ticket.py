@@ -33,7 +33,4 @@ def flight_ticket(s):
         if sel == l[0]:
             l[2] = int(l[2]) - int(s[2])
             return l[0]
-
-            
-    
-        
+       
