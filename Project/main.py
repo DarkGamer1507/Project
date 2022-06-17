@@ -36,7 +36,7 @@ def book_checking(s):
         check = [i for i in read]
 
         for j in check:
-            if j[0] == s[0] and j[1] == s[1] and j[2] == s[2]: # if serial number of new entry matches an old one
+            if j[1] == s[1] and j[2] == s[2]: # if author and book name of new entry matches an old one
                 print("\nThis book already exsits!\n")
                 return (1)
 
@@ -470,6 +470,22 @@ def book_delete():
     else:
         return   
 
+def serial_no():
+    with open("books.csv", 'r', newline='') as file1:
+        reader = csv.reader(file1)
+        read = [i for i in reader]
+
+    last = read.pop()
+
+    try:
+        serial_no = int(last[0])
+    except:
+        serial_no = 0
+
+    new_no = serial_no + 1
+
+    return new_no
+
 def book_add():
 
     # used for adding a new entry to the book's database
@@ -481,7 +497,7 @@ def book_add():
     check = 0 # to confirm if book is added or not
 
     while True:
-        l1.append(input("Serial Number: "))
+        l1.append(serial_no())
         l1.append(input("Author: "))
         l1.append(input("Book name: "))
         l1.append(input("Genre: "))
