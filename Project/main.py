@@ -471,14 +471,18 @@ def book_delete():
         return   
 
 def serial_no():
+
+    #   used to automatically give a new book a serial number
+    #   it is used in order to aviod two books having the same serial number
+
     with open("books.csv", 'r', newline='') as file1:
         reader = csv.reader(file1)
         read = [i for i in reader]
 
-    last = read.pop()
+    last = read.pop()   #   takes the last entry of book's database
 
-    try:
-        serial_no = int(last[0])
+    try: # to check if there is a last entry or not
+        serial_no = int(last[0]) 
     except:
         serial_no = 0
 
