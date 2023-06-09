@@ -6,3 +6,4 @@ def add():
 
     print("Sum of all the elements is : ", x)
 
+add()
