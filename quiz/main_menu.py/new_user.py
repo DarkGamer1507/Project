@@ -2,7 +2,7 @@ import csv
 
 def new_user():
     with open("user.csv","a",newline="") as f: 
-        csv.read = csv.reader(f)
+        read = csv.reader(f)
         for i in csv.read:
             print(i)
         try:
